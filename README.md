@@ -1,1 +1,2 @@
 # arduino-countdown
+![](./schema.png)

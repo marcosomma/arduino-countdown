@@ -15,6 +15,8 @@ int d2 = 10;
 int d1 = 13;
 //Sound
 int outputSound = 17;
+int ledOn = 18;
+int ledCountDown = 19;
 
 // INPUT
 int buttonStart = 14;
@@ -53,6 +55,8 @@ void setup()
   pinMode(s7, OUTPUT);
   pinMode(point, OUTPUT);
   pinMode(outputSound, OUTPUT);
+  pinMode(ledOn, OUTPUT);
+  pinMode(ledCountDown, OUTPUT);
   pinMode(buttonStart, INPUT);
   pinMode(buttonReset, INPUT);
   pinMode(buttonSwitch, INPUT);
@@ -61,13 +65,16 @@ void setup()
   {
     seconds = 30;
   }
+  bipSound();
 }
 
 void loop()
 {
+  digitalWrite(ledOn, HIGH);
   do
   {
     reset();
+    digitalWrite(ledCountDown, LOW);
     buttonStartState = digitalRead(buttonStart);
     buttonSwitchState = digitalRead(buttonSwitch);
 
@@ -95,6 +102,7 @@ void loop()
   } while (n == 0);
   do
   {
+    digitalWrite(ledCountDown, HIGH);
     buttonResetState = digitalRead(buttonReset);
 
     if (buttonResetState == HIGH)

@@ -30,18 +30,16 @@ int buttonSwitchPreavious = LOW;
 int del = 1845;
 int switchSelector = 0;
 int fixedMinutes[] = {
-    0, 1, 2, 3, 4, 5, 10, 15, 20, 30};
+    0, 0, 1, 2, 3, 4, 5, 10, 15, 20, 30, 45, 60};
 int minutes = fixedMinutes[switchSelector];
 int seconds = 0;
 
-long M = minutes * 1000;
-long S = seconds * 100;
-
+long M = minutes * 1000L;
+long S = 0;
 long n = 0;
 
 void setup()
 {
-  Serial.begin(115200);
   pinMode(d1, OUTPUT);
   pinMode(d2, OUTPUT);
   pinMode(d3, OUTPUT);
@@ -63,7 +61,15 @@ void setup()
 
   if (fixedMinutes[switchSelector] == 0)
   {
-    seconds = 30;
+    switch (switchSelector)
+    {
+    default:
+      seconds = 30;
+      break;
+    case 1:
+      seconds = 45;
+      break;
+    };
   }
   bipSound();
 }
@@ -148,7 +154,15 @@ void switchTime()
   }
   if (fixedMinutes[switchSelector] == 0)
   {
-    seconds = 30;
+    switch (switchSelector)
+    {
+    default:
+      seconds = 30;
+      break;
+    case 1:
+      seconds = 45;
+      break;
+    }
   }
   else
   {
@@ -159,8 +173,8 @@ void switchTime()
 void reset()
 {
   minutes = fixedMinutes[switchSelector];
-  M = minutes * 1000;
-  S = seconds * 100;
+  M = minutes * 1000L;
+  S = seconds * 100L;
   n = 0;
 }
 
